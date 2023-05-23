@@ -22,7 +22,6 @@ public class MedicalReport {
     @JoinColumn(name = "patientData_id")
     private PatientData patientData;
 
-    // Other report fields and methods
 
 
 }

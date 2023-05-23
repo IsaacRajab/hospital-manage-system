@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.entity.PatientData;
 import com.example.demo.entity.dto.PatientDataDTO;
+import com.example.demo.mapper.DTOEntityMapper;
 import com.example.demo.repository.PatientDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,7 @@ public class PatientDataService {
 
     public PatientDataDTO getPatientDataById(Long id) {
         Optional<PatientData> patientData = patientDataRepository.findById(id);
-        if (patientData.isPresent()) {
-            return mapPatientDataToDTO(patientData.get());
-        } else {
-            return null;
-        }
+        return patientData.map(DTOEntityMapper::mapPatientDataToDTO).orElse(null);
     }
 
     public PatientDataDTO createPatientData(PatientDataDTO patientDataDTO) {

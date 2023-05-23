@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedicalReportRepository extends JpaRepository<MedicalReport, Long> {
-    // Custom repository methods (if needed)
 }

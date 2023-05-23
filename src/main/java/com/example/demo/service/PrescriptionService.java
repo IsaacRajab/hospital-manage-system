@@ -34,7 +34,6 @@ public class PrescriptionService {
             Prescription existingPrescription = prescription.get();
             existingPrescription.setSerialNumber(prescriptionDTO.getSerialNumber());
             existingPrescription.setPatientData(DTOEntityMapper.mapDTOToPatientData(prescriptionDTO.getPatientData()));
-            // Map other properties as needed
             Prescription updatedPrescription = prescriptionRepository.save(existingPrescription);
             return DTOEntityMapper.mapPrescriptionToDTO(updatedPrescription);
         } else {

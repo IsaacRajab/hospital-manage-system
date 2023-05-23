@@ -2,32 +2,31 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Doctor;
 import com.example.demo.entity.dto.DoctorDTO;
+import com.example.demo.mapper.DTOEntityMapper;
 import com.example.demo.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
+import static com.example.demo.mapper.DTOEntityMapper.mapDoctorDTOToDoctor;
+import static com.example.demo.mapper.DTOEntityMapper.mapDoctorToDoctorDTO;
+
 @Service
-public class DoctorService {
+public class DoctorService {    // THATS CONTAINS THE BUSINESS LOGIC
 
     @Autowired
     private  DoctorRepository doctorRepository;
 
 
 
-    public DoctorDTO getDoctorById(Long id) {
+    public DoctorDTO getDoctorById(Long id) {                           // GET THE DOCTOR BY THE ID FROM THE DATABASE AND RETURN IT AS DTO  to not showing the id to user
         Optional<Doctor> doctor = doctorRepository.findById(id);
-        if (doctor.isPresent()) {
-            return mapDoctorToDoctorDTO(doctor.get());
-        } else {
-            return null;
-        }
+        return doctor.map(DTOEntityMapper::mapDoctorToDoctorDTO).orElse(null);
     }
 
     public DoctorDTO createDoctor(DoctorDTO doctorDTO) {
-        Doctor doctor = mapDoctorDTOToDoctor(doctorDTO);
+        Doctor doctor = mapDoctorDTOToDoctor(doctorDTO);             // add new doctor to the database
         Doctor createdDoctor = doctorRepository.save(doctor);
         return mapDoctorToDoctorDTO(createdDoctor);
     }
@@ -57,21 +56,5 @@ public class DoctorService {
         }
     }
 
-    private DoctorDTO mapDoctorToDoctorDTO(Doctor doctor) {
-        DoctorDTO doctorDTO = new DoctorDTO();
-        doctorDTO.setName(doctor.getName());
-        doctorDTO.setSpecialization(doctor.getSpecialization());
-        doctorDTO.setRank(doctor.getRank());
-        doctorDTO.setSalary(doctor.getSalary());
-        return doctorDTO;
-    }
 
-    private Doctor mapDoctorDTOToDoctor(DoctorDTO doctorDTO) {
-        Doctor doctor = new Doctor();
-        doctor.setName(doctorDTO.getName());
-        doctor.setSpecialization(doctorDTO.getSpecialization());
-        doctor.setRank(doctorDTO.getRank());
-        doctor.setSalary(doctorDTO.getSalary());
-        return doctor;
-    }
 }

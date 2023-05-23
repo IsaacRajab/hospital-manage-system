@@ -6,21 +6,21 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 @Data
-@AllArgsConstructor
+@AllArgsConstructor                         // build our database  table
 @NoArgsConstructor
 @Entity
 @Table(
-        name = "Doctor"
+        name = "Doctor"   /// naming the table
 )
 
 public class Doctor {
-    @Id
+    @Id                         //  uto increment id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name")              // add column to Database
     private  String name;
 
     @Column(name = "specialization")

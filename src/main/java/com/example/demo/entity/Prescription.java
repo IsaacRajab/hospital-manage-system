@@ -22,5 +22,4 @@ public class Prescription {
     @JoinColumn(name = "patientData_id", nullable = false)
     private PatientData patientData;
 
-    // Constructors, getters, and setters
 }

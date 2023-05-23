@@ -9,10 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@RestController
-@RequestMapping("/doctors")
+@RestController                                 // to use rest api  get post delete
+@RequestMapping("/doctors")                 // the request to check doctor localhost:9090/doctors
 public class DoctorController {
-   @Autowired
+   @Autowired                                  // that's used to enjict the constructor
    private  DoctorService doctorService;
 
 
